@@ -685,15 +685,20 @@ int LinxRaspberryPi::UartRead(unsigned char channel, unsigned char numBytes, uns
 {
 	//Check If Enough Bytes Are Available
 	unsigned char bytesAvailable = -1;
+	unsigned char num;
+	num=numBytes;
 	UartGetBytesAvailable(channel, &bytesAvailable);
-	
-	if(bytesAvailable >= numBytes)
+
+	if(bytesAvailable < num){
+		num=bytesAvailable;
+	}
+	if(num>0)
 	{
 		//Read Bytes From Input Buffer
-		int bytesRead = read(UartHandles[channel], recBuffer, numBytes);
+		int bytesRead = read(UartHandles[channel], recBuffer, num);
 		*numBytesRead = (unsigned char) bytesRead;
 		
-		if(bytesRead != numBytes)
+		if(bytesRead != num)
 		{
 			return LUART_READ_FAIL;
 		}		
