@@ -33,7 +33,7 @@
 
 #define NUM_I2C_CHANS 1
 
-#define NUM_UART_CHANS 1
+#define NUM_UART_CHANS 2
 #define NUM_UART_SPEEDS 18
 
 #define NUM_SERVO_CHANS 0
